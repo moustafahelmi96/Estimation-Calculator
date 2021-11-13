@@ -6,10 +6,13 @@ import TableComponent from "../components/TableComponent";
 import Typography from "../components/Typography";
 import colors from "../constants/colors";
 import { perfectHeight, perfectWidth } from "../services/commonFunctions";
+import Button from "../components/Button";
+import AddRound from "./AddRound";
 
 const GameSheet = () => {
   const [playersNames, setPlayersNames] = useState();
   const [loader, setLoader] = useState(false);
+  const [addRoundModal, setAddRoundModal] = useState(false);
 
   const getUserInformation = async () => {
     setLoader(true);
@@ -80,8 +83,17 @@ const GameSheet = () => {
     },
   ];
 
+  const toggleModal = () => {
+    setAddRoundModal(!addRoundModal);
+  };
+
   return (
     <MainContainer>
+      <AddRound
+        showModal={addRoundModal}
+        toggleModal={toggleModal}
+        playersNames={playersNames}
+      />
       <SafeAreaView />
       {loader ? (
         <ActivityIndicator
@@ -115,6 +127,12 @@ const GameSheet = () => {
               );
             })}
           </ScrollView>
+          <Button
+            text={"add round"}
+            onPress={() => {
+              setAddRoundModal(!addRoundModal);
+            }}
+          />
         </TableContainer>
       )}
     </MainContainer>
@@ -140,4 +158,5 @@ const TableContainer = styled.View`
 
 const ScrollView = styled.ScrollView`
   width: ${perfectWidth(100)}px;
+  max-height: 80%;
 `;

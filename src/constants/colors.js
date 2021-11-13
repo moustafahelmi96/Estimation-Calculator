@@ -15,6 +15,7 @@ const colors = {
   placeholder: "#C6BEBE",
   rose: "#F2C7C7",
   orange: "#FDA300",
+  lightBlack: "#1B1B1B",
 };
 
 export default colors;
