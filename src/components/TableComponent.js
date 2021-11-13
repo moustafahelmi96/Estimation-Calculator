@@ -4,8 +4,7 @@ import styled from "styled-components/native";
 import colors from "../constants/colors";
 import { perfectHeight, perfectWidth } from "../services/commonFunctions";
 import Typography from "./Typography";
-import { ActivityIndicator, SafeAreaView } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { SafeAreaView } from "react-native";
 
 const TableComponent = ({ playersInfo, roundNumber, round, lightTheme }) => {
   const identification = roundNumber === 0;
@@ -14,7 +13,6 @@ const TableComponent = ({ playersInfo, roundNumber, round, lightTheme }) => {
     <MainContainer>
       <SafeAreaView />
       <Row backgroundColor={lightTheme ? colors.white : colors.darkGrey}>
-        {/* round number container */}
         <RoundNumberContainer>
           <Typography
             text={identification ? "#" : roundNumber}
@@ -33,17 +31,11 @@ const TableComponent = ({ playersInfo, roundNumber, round, lightTheme }) => {
               maxChar={5}
             />
           </ScoreContainer>
-          {!identification && (
-            <CallContainer>
-              <Typography
-                text={round.firstPlayer.call}
-                fontWeight={"bold"}
-                size={14}
-                maxChar={5}
-                color={colors.black}
-              />
-            </CallContainer>
-          )}
+          <CallComponent
+            identification={identification}
+            call={round?.firstPlayer?.call}
+            isCall={round?.firstPlayer?.isCall}
+          />
         </NameContainer>
         <NameContainer identification={identification}>
           <ScoreContainer>
@@ -57,17 +49,11 @@ const TableComponent = ({ playersInfo, roundNumber, round, lightTheme }) => {
               maxChar={5}
             />
           </ScoreContainer>
-          {!identification && (
-            <CallContainer>
-              <Typography
-                text={round.secondPlayer.call}
-                fontWeight={"bold"}
-                size={14}
-                maxChar={5}
-                color={colors.black}
-              />
-            </CallContainer>
-          )}
+          <CallComponent
+            identification={identification}
+            call={round?.secondPlayer?.call}
+            isCall={round?.secondPlayer?.isCall}
+          />
         </NameContainer>
         <NameContainer identification={identification}>
           <ScoreContainer>
@@ -81,17 +67,11 @@ const TableComponent = ({ playersInfo, roundNumber, round, lightTheme }) => {
               maxChar={5}
             />
           </ScoreContainer>
-          {!identification && (
-            <CallContainer>
-              <Typography
-                text={round.thirdPlayer.call}
-                fontWeight={"bold"}
-                size={14}
-                maxChar={5}
-                color={colors.black}
-              />
-            </CallContainer>
-          )}
+          <CallComponent
+            identification={identification}
+            call={round?.thirdPlayer?.call}
+            isCall={round?.thirdPlayer?.isCall}
+          />
         </NameContainer>
         <NameContainer identification={identification}>
           <ScoreContainer>
@@ -105,23 +85,41 @@ const TableComponent = ({ playersInfo, roundNumber, round, lightTheme }) => {
               maxChar={5}
             />
           </ScoreContainer>
-          {!identification && (
-            <CallContainer>
-              <Typography
-                text={round.forthPlayer.call}
-                fontWeight={"bold"}
-                size={14}
-                maxChar={5}
-                color={colors.black}
-              />
-            </CallContainer>
-          )}
+          <CallComponent
+            identification={identification}
+            call={round?.forthPlayer?.call}
+            isCall={round?.forthPlayer?.isCall}
+          />
         </NameContainer>
       </Row>
     </MainContainer>
   );
 };
 export default TableComponent;
+
+const CallComponent = ({ call, identification, isCall }) => {
+  return (
+    !identification && (
+      <CallContainer>
+        <Typography
+          text={call}
+          fontWeight={"bold"}
+          size={14}
+          maxChar={5}
+          color={colors.black}
+        />
+        {isCall && (
+          <Typography
+            text={"C"}
+            fontWeight={"bold"}
+            maxChar={5}
+            color={colors.negative}
+          />
+        )}
+      </CallContainer>
+    )
+  );
+};
 
 const MainContainer = styled.View`
   width: ${perfectWidth(100)}px;
@@ -166,6 +164,7 @@ const CallContainer = styled.View`
   margin-top: 15%;
   align-items: center;
   justify-content: center;
+  flex-direction: row;
   background-color: ${colors.orange};
 `;
 
