@@ -40,6 +40,13 @@ const PlayersInformation = () => {
     });
   }, []);
 
+  useEffect(() => {
+    setValue("firstPlayer", "moustafa");
+    setValue("secondPlayer", "ossama");
+    setValue("thirdPlayer", "wael");
+    setValue("forthPlayer", "mohab");
+  }, []);
+
   return (
     <MainContainer>
       <KeyboardAwareScrollView>
