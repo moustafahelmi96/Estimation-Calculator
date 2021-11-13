@@ -5,9 +5,8 @@ import { perfectFont, perfectWidth } from "../services/commonFunctions";
 
 const Typography = ({
   text,
-  color = colors.black,
+  color = colors.white,
   size = 16,
-  fontFamily = "Montserrat-Bold",
   noLimit,
   maxChar = 50,
   isRequired,
@@ -15,12 +14,7 @@ const Typography = ({
 }) => {
   return (
     <Row>
-      <Text
-        size={perfectFont(size)}
-        fontFamily={fontFamily}
-        color={color}
-        style={{ ...props }}
-      >
+      <Text size={perfectFont(size)} color={color} style={{ ...props }}>
         {noLimit
           ? text
           : text !== undefined &&
@@ -29,7 +23,6 @@ const Typography = ({
       {isRequired && (
         <Text
           size={perfectFont(20)}
-          fontFamily={fontFamily}
           color={colors.normalTheme.negative}
           style={{ marginLeft: perfectWidth(1) }}
         >
@@ -42,16 +35,7 @@ const Typography = ({
 
 export default Typography;
 
-type TextProps = {
-  color?: string;
-  size: number;
-  fontFamily?: string;
-  textAlign?: string;
-  [anyOtherProp: string]: any;
-};
-
-const Text = styled.Text<TextProps>`
-  font-family: ${(props) => props.fontFamily};
+const Text = styled.Text`
   font-size: ${(props) => props.size}px;
   color: ${(props) => props.color};
   padding-top: 3px;
