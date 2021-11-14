@@ -8,7 +8,6 @@ import { SafeAreaView } from "react-native";
 
 const TableComponent = ({ playersInfo, roundNumber, round, lightTheme }) => {
   const identification = roundNumber === 0;
-  console.log("round", round);
   return (
     <MainContainer>
       <SafeAreaView />

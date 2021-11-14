@@ -115,7 +115,6 @@ const GameSheet = () => {
           <ScrollView>
             {roundsData.map((round, index) => {
               const lightTheme = index % 2 === 0;
-              console.log("lightTheme", lightTheme);
               return (
                 <TableComponent
                   key={index}
